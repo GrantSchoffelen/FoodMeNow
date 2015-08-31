@@ -1,0 +1,33 @@
+<ion-view view-title="Feed Me">
+  <ion-content class="padding">
+    <div class="list card">
+      <div class="item item-divider text-center">Nearest Food</div>
+      <center>
+      <ion-spinner style='width: 60px; height: 60px;' icon='spiral' ng-if='!currentBar'></ion-spinner>
+      </center>
+      <div class="item item-body" ng-if='currentBar'>
+      <center><h1 class='text-center'>{{currentBar.name}}</h1>
+
+      <span ng-repeat='category in currentBar.categories'>
+          <i>{{category[0]}}, </i>
+         <i ng-if="$last">{{category[0]}} </i>
+      </span>
+     
+      <div> <img class='image-responsive middle-align' ng-src='{{currentBar.image_url}}'></div>
+       <div>{{currentBar.distance*0.00062137|limitTo : 4}} mi.</div>
+       <div>Rated:{{currentBar.rating}}/5</div>
+       <div>{{currentBar.snippet_text}}</div>
+       <div><a href='{{currentBar.mobile_url}}' ng-onclick= "window.open('{{currentBar.mobile_url}}', '_blank', 'location=yes');"><button class="button button-positive">Yelp Site</button></a><br>
+            <span ng-repeat='address in currentBar.location.display_address'>
+          <i>{{address}} </i>
+         <i ng-if="$last"></i>
+         <br>
+      </span>
+</center>
+
+       </div>
+      </div>
+    </div>
+    <center><button class="button button-positive" ng-click='nextBar()' ng-disabled="!currentBar">Next Restaurant</button></center>
+  </ion-content>
+</ion-view>
